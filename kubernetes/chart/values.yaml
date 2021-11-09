@@ -1,0 +1,26 @@
+# Default values for chart.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+image:
+  repository: muralikarthikk/pod-reaper
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "1.0.0"
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: "pod-reaper"
+
+# '{"test-name": ["nginx", "nginx-1"],"test-executor": ["pytest"]}'
+reapers:
+  short-running-apps:
+    schedule: "30"
+    run_duration: "4"
+    required_keys_values: '{"test-name": ["nginx", "nginx-1"],"test-executor": ["pytest"]}'
+    max_pod_duration: "1"
